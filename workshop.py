@@ -1,7 +1,5 @@
 import random
 import pygame
-import tkinter as tk
-from tkinter import messagebox
 
 
 
@@ -118,7 +116,6 @@ class snake(object):
                 c.draw(surface)
 
 
-#rysowanie siatki dla pomocy
 def drawGrid(w, rows, surface):
     sizeBtwn = w // rows
     x = 0
@@ -130,7 +127,7 @@ def drawGrid(w, rows, surface):
         pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, w))
         pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
 
-#rysowanie obrazu
+
 def redrawWindow(surface):
     global rows, width, s
     surface.fill((0,0,0))
@@ -154,19 +151,10 @@ def randomSnack(rows, item):
     return (x, y)
 
 
-def message_box(subject, content):
-    root = tk.Tk()
-    root.attributes("-topmost", True)
-    root.withdraw()
-    messagebox.showinfo(subject, content)
-    try:
-        root.destroy()
-    except:
-        pass
+
 
 
 def main():
-    #ustawienia poczatkoweg
     global rows, width, s, snack
     width = 500
     rows = 20
@@ -177,7 +165,7 @@ def main():
 
     clock = pygame.time.Clock()
 
-    #petla gry
+
     while flag:
         pygame.time.delay(50)
         clock.tick(10)
@@ -189,7 +177,6 @@ def main():
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
                 print('Score: ', len(s.body))
-                message_box('Przegrales', 'Zagraj jeszcze raz!')
                 s.reset((10, 10))
                 break
         redrawWindow(win)
